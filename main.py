@@ -1,13 +1,12 @@
-from flask import Flask, request
+from flask import Flask, request, render_template
 
-app: Flask = Flask(__name__)
+app = Flask(__name__, template_folder='templates')
 
-
-@app.get('/')
-def processing_numbarr() -> str:
+@app.route('/')
+def processing_numbarr():
     name = request.args.get('name')
     message = request.args.get('message')
-    return f"Привет, {name}! Твое сообщение: {message}"
+    return render_template('index.html', name=name, message=message)
 
 if __name__ == "__main__":
     app.run()
